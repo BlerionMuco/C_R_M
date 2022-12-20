@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 const dotenv = require('dotenv').config();
 
-console.log("HELOOOOOOOOOOOOOO", dotenv)
-
 app.get('/', function (req, res) {
 
     var sql = require("mssql");
