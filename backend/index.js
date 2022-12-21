@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const usersRoutes = require('./routes/usersRoutes');
 
 const app = express();
-app.use('/api', usersRoutes.routes)
 
 app.use(cors());
+app.use(express.json());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(config.port, () => console.log('Server is running on http://localhost:' + config.port))
+app.use('/api', usersRoutes.routes)
