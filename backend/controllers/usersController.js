@@ -1,8 +1,6 @@
 'use strict'
 const userData = require('../data/users');
 
-console.log({ userData });
-
 const getAllUsers = async (req, res, next) => {
     try {
         const userslist = await userData.getAllUsers();
@@ -22,7 +20,41 @@ const getUser = async (req, res, next) => {
     }
 }
 
+const createUser = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await userData.createUser(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const updateUser = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const data = req.body;
+        const updated = await userData.updateUser(userId, data);
+        res.send(updated);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const deleteUser = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const deleteUser = await userData.deleteUser(userId);
+        res.send(deleteUser);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUser,
+    createUser,
+    updateUser,
+    deleteUser
 }
