@@ -5,24 +5,20 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import "./style/SignIn.css"
+import { Link } from 'react-router-dom';
 
 const SignInComponent = () => {
-    //const [dataForm, setDataForm] = useState({ username: "", password: "" });
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const handleChange = (event) => {
-        if (event.target.name === "username") {
-            setUsername(event.target.value)
-        }
-        else {
-            setPassword(event.target.value)
-        }
+    const [dataForm, setDataForm] = useState({ username: "", password: "" });
+    const handleChange = (e) => {
+        setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
+
+    console.log({ dataForm });
 
     return (
         <div>
             <BackGround>
-                <Box sx={{ backgroundColor: "#E0E1DD", maxWidth: "300px", margin: "0 auto", p: "25px", borderRadius: "10px", }}>
+                <Box sx={{ backgroundColor: "#E0E1DD", maxWidth: "300px", margin: "0 auto", p: "25px", borderRadius: "8px", }}>
                     <Grid container spacing={2}>
                         <Grid sx={{ textAlign: "center" }} item xs={12}>
                             <div style={{ fontSize: "17px", fontWeight: "600" }}>Log In</div>
@@ -55,9 +51,13 @@ const SignInComponent = () => {
                         <Grid item xs={12}>
                             <Button className="btn-grad" sx={{ width: "100%" }} variant="contained">Log In</Button>
                         </Grid>
+
                         <Grid className='signIn-signUp-text' item xs={12}>
-                            Sign Up
+                            <Link className='signIn-signUp-text' to="/register" >
+                                Sign Up
+                            </Link>
                         </Grid>
+
                         <Grid item className='signIn-signUp-text' xs={12}>
                             Forget my password
                         </Grid>
