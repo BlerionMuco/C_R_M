@@ -12,7 +12,7 @@ body {
 .context {
   width: 100%;
   position: absolute;
-  top: 28%;
+  top: 24%;
   z-index: 10;
 }
 
@@ -135,5 +135,11 @@ body {
     transform: translateY(-1000px) rotate(720deg);
     opacity: 0;
     border-radius: 50%;
+  }
+}
+
+@media screen and (max-width:700px) {
+  .context {
+    top: 28px;
   }
 }

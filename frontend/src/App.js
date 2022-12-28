@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createBrowserHistory as history } from "history";
 import SignInComponent from './Containers/SignInComponent';
+import RegisterComponent from './Containers/RegisterComponent';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<SignInComponent />} />
-          {/* <Route exact path="/signUp" element={<SignUp />} /> */}
+          <Route exact path="/register" element={<RegisterComponent />} />
         </Routes>
       </div>
     </Router>

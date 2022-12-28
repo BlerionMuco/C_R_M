@@ -1,10 +1,8 @@
 .btn-grad {
-  background-image: linear-gradient(
-    to right,
-    #614385 0%,
-    #516395 51%,
-    #614385 100%
-  );
+  background-image: linear-gradient(to right,
+      #614385 0%,
+      #516395 51%,
+      #614385 100%);
   padding: 10px 45px;
   text-align: center;
   text-transform: uppercase;
@@ -15,10 +13,12 @@
   border-radius: 10px;
   display: block;
   font-family: "Exo" !important;
+
 }
 
 .btn-grad:hover {
-  background-position: right center; /* change the direction of the change here */
+  background-position: right center;
+  /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
 }
@@ -27,6 +27,8 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 .signIn-signUp-text:hover {
