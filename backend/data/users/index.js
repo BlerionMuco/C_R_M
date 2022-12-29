@@ -32,8 +32,8 @@ const createUser = async (userData) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertUser = await pool.request()
-            .input('firstName', sql.NVarChar(250), userData.firstName)
-            .input('lastName', sql.NVarChar(250), userData.lastName)
+            .input('first_name', sql.NVarChar(250), userData.first_name)
+            .input('last_name', sql.NVarChar(250), userData.last_name)
             .input('age', sql.NVarChar(250), userData.age)
             .input('username', sql.NVarChar(250), userData.username)
             .input('email', sql.NVarChar(250), userData.email)
@@ -42,7 +42,7 @@ const createUser = async (userData) => {
             .input('user_verification_password', sql.NVarChar(250), userData.user_verification_password)
             .input('role_id', sql.Int(250), userData.role_id)
             .query(sqlQueries.createUser);
-        return insertUser.recordset;
+        return { status: "fullfilled", message: "User Created" };
     } catch (error) {
         return error.message;
     }
@@ -54,8 +54,8 @@ const updateUser = async (userId, data) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const update = await pool.request()
             .input('userId', sql.Int, userId)
-            .input('firstName', sql.NVarChar(250), userData.firstName)
-            .input('lastName', sql.NVarChar(250), userData.lastName)
+            .input('first_name', sql.NVarChar(250), userData.first_name)
+            .input('last_name', sql.NVarChar(250), userData.last_name)
             .input('age', sql.NVarChar(250), userData.age)
             .input('username', sql.NVarChar(250), userData.username)
             .input('email', sql.NVarChar(250), userData.email)
@@ -64,7 +64,7 @@ const updateUser = async (userId, data) => {
             .input('user_verification_password', sql.NVarChar(250), userData.user_verification_password)
             .input('role_id', sql.Int(250), userData.role_id)
             .query(sqlQueries.updateUser);
-        return update.recordset;
+        return { status: "fullfilled", message: "User Updated" };
     } catch (error) {
         return error.message;
     }
@@ -77,7 +77,7 @@ const deleteUser = async (userId) => {
         const deleteUser = await pool.request()
             .input('userId', sql.Int, userId)
             .query(sqlQueries.deleteUser);
-        return deleteUser.recordset;
+        return { status: "fullfilled", message: "User Deleted" };
     } catch (error) {
         return error.message;
     }
