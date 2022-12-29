@@ -5,11 +5,19 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUserAsync } from '../redux/reducers/user';
 
 const RegisterComponent = () => {
-    const [dataForm, setDataForm] = useState({ first_name: "", last_name: "", username: "", password: "", verification_password: "", email: "", age: "", phone_number: "" });
+    const dispatch = useDispatch();
+    const [dataForm, setDataForm] = useState({ first_name: null, last_name: "", username: "", user_password: "", user_verification_password: "", email: "", age: "", phone_number: "", role_id: 3 });
+
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
+    }
+
+    const createUser = () => {
+        dispatch(createUserAsync(dataForm))
     }
 
     return (
@@ -28,7 +36,6 @@ const RegisterComponent = () => {
                                         name="first_name"
                                         size='small'
                                         required
-                                        id="outlined-required"
                                         label="Firstname"
                                         sx={{ width: "100%" }}
                                     />
@@ -39,7 +46,6 @@ const RegisterComponent = () => {
                                         name="last_name"
                                         size='small'
                                         required
-                                        id="outlined-required"
                                         label="Lastname"
                                         sx={{ width: "100%" }}
                                     />
@@ -53,8 +59,6 @@ const RegisterComponent = () => {
                                         onChange={handleChange}
                                         name="age"
                                         size='small'
-                                        required
-                                        id="outlined-required"
                                         label="Age"
                                         sx={{ width: "100%" }}
                                     />
@@ -64,8 +68,6 @@ const RegisterComponent = () => {
                                         onChange={handleChange}
                                         name="phone_number"
                                         size='small'
-                                        required
-                                        id="outlined-required"
                                         label="Phone number"
                                         sx={{ width: "100%" }}
                                     />
@@ -78,7 +80,6 @@ const RegisterComponent = () => {
                                 name="username"
                                 size='small'
                                 required
-                                id="outlined-required"
                                 label="Username"
                                 sx={{ width: "100%" }}
                             />
@@ -89,7 +90,6 @@ const RegisterComponent = () => {
                                 name="email"
                                 size='small'
                                 required
-                                id="outlined-required"
                                 label="Email"
                                 sx={{ width: "100%" }}
                             />
@@ -97,11 +97,10 @@ const RegisterComponent = () => {
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
-                                name="password"
+                                name="user_password"
                                 sx={{ width: "100%" }}
                                 size='small'
                                 required
-                                id="outlined-password-input"
                                 label="Password"
                                 type="password"
                                 autoComplete="current-password"
@@ -110,18 +109,17 @@ const RegisterComponent = () => {
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
-                                name="verify_password"
+                                name="user_verification_password"
                                 sx={{ width: "100%" }}
                                 size='small'
                                 required
-                                id="outlined-password-input"
                                 label="Verify Password"
                                 type="password"
                                 autoComplete="current-password"
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button className="btn-grad" sx={{ width: "100%" }} variant="contained">Sign Up</Button>
+                            <Button onClick={createUser} className="btn-grad" sx={{ width: "100%" }} variant="contained">Sign Up</Button>
                         </Grid>
                         <Grid className='signIn-signUp-text' item xs={12}>
                             <Link to="/" className='signIn-signUp-text'>Already have a Account</Link>

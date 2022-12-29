@@ -1,6 +1,6 @@
 UPDATE [dbo].[users]
-SET [first_name]=@firstName,
-    [last_name]=@lastName,
+SET [first_name]=@first_name,
+    [last_name]=@last_name,
     [age]=@age,
     [username]=@username,
     [email]=@email,
