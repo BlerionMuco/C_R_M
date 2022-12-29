@@ -138,8 +138,20 @@ body {
   }
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-height: 700px) {
   .context {
-    top: 28px;
+    top: 12%;
+  }
+}
+
+@media screen and (max-height: 610px) {
+  .context {
+    top: 9%;
+  }
+}
+
+@media screen and (min-height: 701px) and (max-height: 850px) {
+  .context {
+    top: 17%;
   }
 }
