@@ -10,11 +10,12 @@ const initialState = {
 
 export const createUserAsync = createAsyncThunk(
     'POST_USER_REQUEST',
-    async (userData) => {
-        console.log(process.env.REACT_APP_BACKEND_URL);
-        const res = await axios.post(process.env.REACT_APP_BACKEND_URL, { ...userData });
+    async ({dataForm, callThunk}) => {
+        const {data} = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/users", dataForm );
         // Set the response to the state.
-        return res.data
+        if (!data) return
+        callThunk();
+        return data
     }
 )
 

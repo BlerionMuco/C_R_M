@@ -7,17 +7,20 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserAsync } from '../redux/reducers/user';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterComponent = () => {
     const dispatch = useDispatch();
     const [dataForm, setDataForm] = useState({ first_name: null, last_name: "", username: "", user_password: "", user_verification_password: "", email: "", age: "", phone_number: "", role_id: 3 });
-
+    const navigate= useNavigate();
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
 
     const createUser = () => {
-        dispatch(createUserAsync(dataForm))
+        dispatch(createUserAsync({dataForm, callThunk:()=>{
+            navigate("/")
+        }}))
     }
 
     return (
