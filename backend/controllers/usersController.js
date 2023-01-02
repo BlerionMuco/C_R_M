@@ -23,8 +23,17 @@ const getUser = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     try {
         const data = req.body;
-        const insert = await userData.createUser(data);
-        res.send(insert);
+        const email= data.email;
+        const ans = await userData.checkUser(email)
+        if(ans.count>0){
+           res.send(ans);
+        }
+        else{
+             //here will add token and retunr that on front end when we will save that on localstorage or cookies
+            const insert = await userData.createUser(data);
+            res.send(insert);
+        }
+       
     } catch (error) {
         res.status(400).send(error.message);
     }
