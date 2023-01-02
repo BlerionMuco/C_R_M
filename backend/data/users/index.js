@@ -14,6 +14,19 @@ const getAllUsers = async () => {
     }
 }
 
+const checkUser = async (email) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const checkUser = await pool.request()
+            .input('email', sql.NVarChar(250), email)
+            .query(sqlQueries.checkUser);
+            return { status: "fullfilled", message: "User already exist", count: checkUser.recordsets[0][0].cnt };
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 const getById = async (userId) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -88,5 +101,6 @@ module.exports = {
     getById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    checkUser
 }
