@@ -8,29 +8,29 @@ const initialState = {
     message: "",
 };
 
-export const createUserAsync = createAsyncThunk(
-    'POST_USER_REQUEST',
-    async ({ dataForm, callThunk }) => {
-        const { data } = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/users", dataForm);
+export const authUserAsync = createAsyncThunk(
+    'AUTH_USER_REQUEST',
+    async ({ dataForm }) => {
+        const { data } = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/signIn", dataForm);
         if (!data) return
-        callThunk();
+        localStorage.setItem('token', data.token)
         return data
     }
 )
 
 const UserSlice = createSlice({
-    name: "users",
+    name: "auth",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(createUserAsync.pending, (state, action) => {
+        builder.addCase(authUserAsync.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(createUserAsync.rejected, (state, action) => {
+        builder.addCase(authUserAsync.rejected, (state, action) => {
             state.loading = false;
             state.message = "Oops something goes wrong... :("
         });
-        builder.addCase(createUserAsync.fulfilled, (state, action) => {
+        builder.addCase(authUserAsync.fulfilled, (state, action) => {
             console.log(action.payload);
             state.loading = false;
             state.data = action.payload.data
