@@ -1,5 +1,5 @@
-'use strict'
-const userData = require('../data/users');
+"use strict";
+const userData = require("../data/users");
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -8,7 +8,7 @@ const getAllUsers = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const getUser = async (req, res, next) => {
     try {
@@ -18,26 +18,26 @@ const getUser = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const createUser = async (req, res, next) => {
     try {
         const data = req.body;
-        const email= data.email;
-        const ans = await userData.checkUser(email)
-        if(ans.count>0){
-           res.send(ans);
-        }
-        else{
-             //here will add token and retunr that on front end when we will save that on localstorage or cookies
+        console.log({ data });
+        const email = data.email;
+        const name = data.first_name;
+        const ans = await userData.checkUser(email);
+        if (ans.count > 0) {
+            res.send(ans);
+        } else {
             const insert = await userData.createUser(data);
-            res.send(insert);
+            const dataReturn = { ...insert, token }
+            res.send(dataReturn);
         }
-       
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const updateUser = async (req, res, next) => {
     try {
@@ -48,7 +48,7 @@ const updateUser = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const deleteUser = async (req, res, next) => {
     try {
@@ -58,12 +58,12 @@ const deleteUser = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 module.exports = {
     getAllUsers,
     getUser,
     createUser,
     updateUser,
-    deleteUser
-}
+    deleteUser,
+};

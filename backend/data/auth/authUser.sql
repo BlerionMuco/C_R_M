@@ -1,0 +1,11 @@
+SELECT [id]
+    ,[first_name]
+    ,[last_name]
+    ,[age]
+    ,[username]
+    ,[phone_number]
+    ,[user_password]
+    ,[user_verification_password]
+    ,[role_id]
+FROM [dbo].[users]
+WHERE [username]=@username AND [user_password]= @user_password
