@@ -6,14 +6,26 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import "./style/SignIn.css"
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authUserAsync } from '../redux/reducers/auth';
+import { useNavigate } from "react-router-dom";
+
 
 const SignInComponent = () => {
-    const [dataForm, setDataForm] = useState({ username: "", password: "" });
+    const [dataForm, setDataForm] = useState({ username: "", user_password: "" });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
 
-    console.log({ dataForm });
+    const signInUser = () => {
+        dispatch(authUserAsync({ dataForm })).then((res) => {
+            if (res.payload.token) {
+                navigate('/dashboard')
+            }
+        })
+    }
 
     return (
         <div>
@@ -38,7 +50,7 @@ const SignInComponent = () => {
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
-                                name="password"
+                                name="user_password"
                                 sx={{ width: "100%" }}
                                 size='small'
                                 required
@@ -49,7 +61,7 @@ const SignInComponent = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Button className="btn-grad" sx={{ width: "100%" }} variant="contained">Log In</Button>
+                            <Button className="btn-grad" sx={{ width: "100%" }} onClick={signInUser} variant="contained">Log In</Button>
                         </Grid>
 
                         <Grid className='signIn-signUp-text' item xs={12}>
