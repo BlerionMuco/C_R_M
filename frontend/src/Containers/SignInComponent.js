@@ -15,21 +15,28 @@ const SignInComponent = () => {
     const [dataForm, setDataForm] = useState({ username: "", user_password: "" });
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    //const token = localStorage.getItem('token');
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
 
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate('/work')
+    //     }
+    // }, [token, navigate]);
+
     const signInUser = () => {
         dispatch(authUserAsync({ dataForm })).then((res) => {
             if (res.payload.token) {
-                navigate('/dashboard')
+                navigate('/work')
             }
         })
     }
 
     return (
         <div>
-            <BackGround>
+            < BackGround >
                 <Box sx={{ backgroundColor: "#E0E1DD", maxWidth: "300px", margin: "0 auto", p: "25px", borderRadius: "8px", }}>
                     <Grid container spacing={2}>
                         <Grid sx={{ textAlign: "center" }} item xs={12}>
@@ -76,7 +83,7 @@ const SignInComponent = () => {
                     </Grid>
                 </Box>
             </BackGround>
-        </div>
+        </div >
     )
 }
 
