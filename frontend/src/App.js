@@ -3,18 +3,30 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createBrowserHistory as history } from "history";
 import SignInComponent from './Containers/SignInComponent';
 import RegisterComponent from './Containers/RegisterComponent';
-import DashboardComponent from './Containers/DashboardComponent';
+import WorkComponent from './Containers/Components/WorkComponent';
+import WithDashboard from './Containers/Nav/WithDashboard';
+import WithoutDashboard from './Containers/Nav/WithoutDashboard';
+import ProfileComponent from './Containers/Components/ProfileComponent';
 
-const token= localStorage.getItem('token')
+const token = localStorage.getItem('token')
 
 function App() {
   return (
     <Router history={history}>
       <div>
         <Routes>
-          <Route exact path="/" element={<SignInComponent />} />
-          <Route exact path="/register" element={<RegisterComponent />} />
-          {token && <Route exact path="/dashboard" element={<DashboardComponent />} /> }
+          <Route element={<WithoutDashboard />} >
+            <Route exact path="/" element={<SignInComponent />} />
+          </Route>
+          <Route element={<WithoutDashboard />} >
+            <Route exact path="/register" element={<RegisterComponent />} />
+          </Route>
+          <Route element={<WithDashboard component={<WorkComponent />} />} >
+            {token && <Route exact path="/work" element={<WorkComponent />} />}
+          </Route>
+          <Route element={<WithDashboard component={<ProfileComponent/>} />} >
+            {token && <Route exact path="/profile" element={<ProfileComponent />} />}
+          </Route>
         </Routes>
       </div>
     </Router>
