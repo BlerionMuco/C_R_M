@@ -9,8 +9,6 @@ import WithoutDashboard from './Containers/Nav/WithoutDashboard';
 import ProfileComponent from './Containers/Components/ProfileComponent';
 import ProtectedRoute from './Containers/Nav/ProtectedRoute';
 
-const token = localStorage.getItem('token')
-
 function App() {
   return (
     <Router history={history}>

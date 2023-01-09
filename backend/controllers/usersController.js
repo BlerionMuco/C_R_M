@@ -31,7 +31,7 @@ const createUser = async (req, res, next) => {
             res.send(ans);
         } else {
             const insert = await userData.createUser(data);
-            const dataReturn = { ...insert, token }
+            const dataReturn = { ...insert }
             res.send(dataReturn);
         }
     } catch (error) {

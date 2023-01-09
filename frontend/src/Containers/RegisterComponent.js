@@ -12,15 +12,17 @@ import { useNavigate } from 'react-router-dom';
 const RegisterComponent = () => {
     const dispatch = useDispatch();
     const [dataForm, setDataForm] = useState({ first_name: null, last_name: "", username: "", user_password: "", user_verification_password: "", email: "", age: "", phone_number: "", role_id: 3 });
-    const navigate= useNavigate();
+    const navigate = useNavigate();
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
 
     const createUser = () => {
-        dispatch(createUserAsync({dataForm, callThunk:()=>{
-            navigate("/")
-        }}))
+        dispatch(createUserAsync({
+            dataForm, callThunk: () => {
+                navigate("/")
+            }
+        }))
     }
 
     return (
