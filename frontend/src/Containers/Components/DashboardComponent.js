@@ -81,11 +81,13 @@ const DashboardComponent = ({ component }) => {
         navigate(`${link}`)
     }
 
+    console.log(window.location);
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
-                <Toolbar>
+                <Toolbar sx={{ background: "#4e54c8" }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -121,7 +123,7 @@ const DashboardComponent = ({ component }) => {
                 <Divider />
                 <List>
                     {menuItems.map((menu) => (
-                        <ListItem key={menu.id} disablePadding onClick={() => redirect(menu.redirect)}>
+                        <ListItem sx={window.location.pathname === menu.pathname ? { background: "red", borderRadius:"10px", marginRight:"10px" } : { background: "" }} key={menu.id} disablePadding onClick={() => redirect(menu.redirect)}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     {menu.icon}
