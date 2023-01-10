@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { menuItems } from '../../Contains/menu';
 import { useNavigate, Navigate } from "react-router-dom";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -81,11 +82,13 @@ const DashboardComponent = ({ component }) => {
         navigate(`${link}`)
     }
 
+    console.log(window.location);
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
-                <Toolbar>
+                <Toolbar sx={{ background: "#4e54c8", display: "flex", justifyContent: "space-between" }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -96,8 +99,12 @@ const DashboardComponent = ({ component }) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Persistent drawer
+                        Hello Blerion
                     </Typography>
+                    <div onClick={() => navigate("/profile")} style={{ alignItems: "center", display: "inline-grid", cursor: "pointer" }}>
+                        <AccountCircleIcon fontSize='large' sx={{ margin: "0 auto" }} />
+                        <div style={{ fontSize: "14px" }}>Username</div>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -119,9 +126,9 @@ const DashboardComponent = ({ component }) => {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List>
+                <List sx={{ margin: "0 10px" }}>
                     {menuItems.map((menu) => (
-                        <ListItem key={menu.id} disablePadding onClick={() => redirect(menu.redirect)}>
+                        <ListItem sx={window.location.pathname === menu.pathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px" } : { background: "", marginBottom: "8px" }} key={menu.id} disablePadding onClick={() => redirect(menu.redirect)}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     {menu.icon}

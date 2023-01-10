@@ -5,13 +5,17 @@ import ProfileComponent from '../Containers/Components/ProfileComponent';
 export const menuItems = [
     {
         id: 1,
+        name: "work",
         label: "Work",
+        pathname: "/work",
         icon: <WorkIcon />,
         redirect: "/work",
         components: <WorkComponent />
     },
     {
         id: 2,
+        name: "profile",
+        pathname: "/profile",
         label: "Profile",
         icon: <AccountBoxIcon />,
         redirect: "/profile",
