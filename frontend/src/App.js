@@ -8,6 +8,7 @@ import WithDashboard from './Containers/Nav/WithDashboard';
 import WithoutDashboard from './Containers/Nav/WithoutDashboard';
 import ProfileComponent from './Containers/Components/ProfileComponent';
 import ProtectedRoute from './Containers/Nav/ProtectedRoute';
+import CalendarComponent from './Containers/Components/CalendarComponent';
 
 function App() {
   return (
@@ -21,12 +22,13 @@ function App() {
             <Route exact path="/register" element={<RegisterComponent />} />
           </Route>
           <Route element={<WithDashboard component={<WorkComponent />} />} >
-            {/* {token && <Route exact path="/work" element={<WorkComponent />} />} */}
             <Route exact path="/work" element={<ProtectedRoute path="/work" component={<WorkComponent />} />} />
           </Route>
           <Route element={<WithDashboard component={<ProfileComponent />} />} >
-            {/* {token && <Route exact path="/profile" element={<ProfileComponent />} />} */}
             <Route exact path="/profile" element={<ProtectedRoute path="/profile" component={<ProfileComponent />} />} />
+          </Route>
+          <Route element={<WithDashboard component={<CalendarComponent />} />} >
+            <Route exact path="/calendar" element={<ProtectedRoute path="/calendar" component={<CalendarComponent />} />} />
           </Route>
         </Routes>
       </div>
