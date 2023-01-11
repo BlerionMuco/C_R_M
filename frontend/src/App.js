@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createBrowserHistory as history } from "history";
 import SignInComponent from './Containers/SignInComponent';
 import RegisterComponent from './Containers/RegisterComponent';
-import WorkComponent from './Containers/Components/WorkComponent';
+import WorkComponent from './Containers/Components/Work/WorkComponent';
 import WithDashboard from './Containers/Nav/WithDashboard';
 import WithoutDashboard from './Containers/Nav/WithoutDashboard';
-import ProfileComponent from './Containers/Components/ProfileComponent';
+import ProfileComponent from './Containers/Components/Profile/ProfileComponent';
 import ProtectedRoute from './Containers/Nav/ProtectedRoute';
-import CalendarComponent from './Containers/Components/CalendarComponent';
+import CalendarComponent from './Containers/Components/Calendar/CalendarComponent';
 
 function App() {
   return (

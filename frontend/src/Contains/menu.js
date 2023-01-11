@@ -2,9 +2,9 @@ import WorkIcon from '@mui/icons-material/Work';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-import WorkComponent from '../Containers/Components/WorkComponent'
-import ProfileComponent from '../Containers/Components/ProfileComponent';
-import CalendarComponent from '../Containers/Components/CalendarComponent';
+import WorkComponent from '../Containers/Components/Work/WorkComponent'
+import ProfileComponent from '../Containers/Components/Profile/ProfileComponent';
+import CalendarComponent from '../Containers/Components/Calendar/CalendarComponent';
 export const menuItems = [
     {
         id: 1,
@@ -25,7 +25,7 @@ export const menuItems = [
         component: <ProfileComponent />
     },
     {
-        id: 2,
+        id: 3,
         name: "calendar",
         pathname: "/calendar",
         label: "Calendar",

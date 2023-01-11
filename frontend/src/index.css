@@ -9,3 +9,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* .Mui-disabled{
+  color: white !important;
+} */
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+  min-width: 380px !important;
+}
