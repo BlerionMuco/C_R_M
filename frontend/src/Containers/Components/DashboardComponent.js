@@ -151,7 +151,7 @@ const DashboardComponent = ({ component }) => {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                {component}
+                {React.cloneElement(component, { open: open })}
             </Main>
         </Box>
     );
