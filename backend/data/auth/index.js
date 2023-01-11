@@ -3,7 +3,6 @@ const utils = require('../utils');
 const config = require('../../config')
 
 const authUser = async ({ username, user_password }) => {
-    console.log({ username, user_password });
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('auth');
