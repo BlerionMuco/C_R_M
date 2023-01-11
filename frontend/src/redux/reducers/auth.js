@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 const initialState = {
+    loggedUser: {},
     data: {},
     loading: false,
     message: "",
@@ -18,7 +19,7 @@ export const authUserAsync = createAsyncThunk(
     }
 )
 
-const UserSlice = createSlice({
+const AuthSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
@@ -33,9 +34,9 @@ const UserSlice = createSlice({
         builder.addCase(authUserAsync.fulfilled, (state, action) => {
             console.log(action.payload);
             state.loading = false;
-            state.data = action.payload.data
+            state.loggedUser = action.payload.user
         });
     },
 });
 
-export default UserSlice.reducer;
+export default AuthSlice.reducer;

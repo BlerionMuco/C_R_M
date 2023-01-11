@@ -18,7 +18,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { menuItems } from '../../Contains/menu';
 import { useNavigate, Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -74,6 +77,8 @@ const DashboardComponent = ({ component }) => {
         setOpen(true);
     };
 
+    const username = useSelector(state => state.auth.loggedUser.username)
+
     const handleDrawerClose = () => {
         setOpen(false);
     };
@@ -82,7 +87,10 @@ const DashboardComponent = ({ component }) => {
         navigate(`${link}`)
     }
 
-    console.log(window.location);
+    const logOut = () => {
+        navigate("/");
+        localStorage.removeItem('token');
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -99,11 +107,11 @@ const DashboardComponent = ({ component }) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Hello Blerion
+                        Hello {username}
                     </Typography>
                     <div onClick={() => navigate("/profile")} style={{ alignItems: "center", display: "inline-grid", cursor: "pointer" }}>
                         <AccountCircleIcon fontSize='large' sx={{ margin: "0 auto" }} />
-                        <div style={{ fontSize: "14px" }}>Username</div>
+                        <div style={{ fontSize: "14px", textAlign: "center" }}>{username}</div>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -120,13 +128,14 @@ const DashboardComponent = ({ component }) => {
                 anchor="left"
                 open={open}
             >
-                <DrawerHeader>
+                <DrawerHeader sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <div style={{ fontWeight: "600", fontSize: "18px", marginLeft: "75px", paddingTop: "5px" }}>TICK</div>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List sx={{ margin: "0 10px" }}>
+                <List sx={{ margin: "0 10px", height: "100vh" }}>
                     {menuItems.map((menu) => (
                         <ListItem sx={window.location.pathname === menu.pathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px" } : { background: "", marginBottom: "8px" }} key={menu.id} disablePadding onClick={() => redirect(menu.redirect)}>
                             <ListItemButton>
@@ -137,6 +146,7 @@ const DashboardComponent = ({ component }) => {
                             </ListItemButton>
                         </ListItem>
                     ))}
+                    <Button variant="contained" size='medium' color='primary' onClick={logOut} startIcon={<LogoutIcon />} sx={{ position: "absolute", width: "100%", bottom: "10px" }}>Log Out</Button>
                 </List>
             </Drawer>
             <Main open={open}>
