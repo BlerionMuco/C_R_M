@@ -77,7 +77,7 @@ const DashboardComponent = ({ component }) => {
         setOpen(true);
     };
 
-    const username = useSelector(state => state.auth.loggedUser.username)
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'))
 
     const handleDrawerClose = () => {
         setOpen(false);
@@ -90,6 +90,7 @@ const DashboardComponent = ({ component }) => {
     const logOut = () => {
         navigate("/");
         localStorage.removeItem('token');
+        localStorage.removeItem('loggedUser');
     }
 
     return (
@@ -107,11 +108,11 @@ const DashboardComponent = ({ component }) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Hello {username}
+                        Hello {loggedUser.username}
                     </Typography>
                     <div onClick={() => navigate("/profile")} style={{ alignItems: "center", display: "inline-grid", cursor: "pointer" }}>
                         <AccountCircleIcon fontSize='large' sx={{ margin: "0 auto" }} />
-                        <div style={{ fontSize: "14px", textAlign: "center" }}>{username}</div>
+                        <div style={{ fontSize: "14px", textAlign: "center" }}>{loggedUser.username}</div>
                     </div>
                 </Toolbar>
             </AppBar>
