@@ -21,7 +21,7 @@ const checkUser = async (email) => {
         const checkUser = await pool.request()
             .input('email', sql.NVarChar(250), email)
             .query(sqlQueries.checkUser);
-            return { status: "fullfilled", message: "User already exist", count: checkUser.recordsets[0][0].cnt };
+        return { status: "fullfilled", message: "User already exist", count: checkUser.recordsets[0][0].cnt };
     } catch (error) {
         console.log(error.message);
     }
@@ -102,5 +102,5 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    checkUser
+    checkUser,
 }
