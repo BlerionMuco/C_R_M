@@ -32,9 +32,9 @@ const AuthSlice = createSlice({
             state.message = "Oops something goes wrong... :("
         });
         builder.addCase(authUserAsync.fulfilled, (state, action) => {
-            console.log(action.payload);
             state.loading = false;
             state.loggedUser = action.payload.user
+            localStorage.setItem('loggedUser', JSON.stringify(action.payload.user))
         });
     },
 });

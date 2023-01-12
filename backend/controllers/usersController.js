@@ -23,9 +23,7 @@ const getUser = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     try {
         const data = req.body;
-        console.log({ data });
         const email = data.email;
-        const name = data.first_name;
         const ans = await userData.checkUser(email);
         if (ans.count > 0) {
             res.send(ans);
