@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import UserData from './UserData';
 import PasswordComponent from './PasswordComponent';
-import { getAllRoles } from "./../../../redux/reducers/user"
+import { getAllRoles } from '../../../redux/reducers/staticData';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,7 +49,7 @@ const ProfileComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const tabValue = searchParams.get('title')
   const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-  const allRoles = useSelector(state => state.user.roles)
+  const allRoles = useSelector(state => state.staticData.roles)
   const dispatch = useDispatch()
 
   useEffect(() => {
