@@ -25,7 +25,7 @@ const UserData = ({ loggedUser, allRoles }) => {
 
                     {fields && fields.map((field, index) => {
                         return (
-                            <Grid item xs={12} md={4}>
+                            <Grid key={index} item xs={12} md={4}>
                                 <TextField
                                     required
                                     fullWidth

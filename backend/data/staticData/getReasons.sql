@@ -1,0 +1,1 @@
+select [id],[reason] from [dbo].[reason]
