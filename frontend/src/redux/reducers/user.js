@@ -19,6 +19,16 @@ export const createUserAsync = createAsyncThunk(
     }
 )
 
+export const updateUserPassword = createAsyncThunk(
+    'UPDATE_USER_PASSWORD_REQUEST',
+    async ({ userId, user_password }) => {
+        console.log(userId, user_password);
+        const { data } = await axios.put(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}/updatePassword`, { user_password: user_password });
+        if (!data) return
+        return data
+    }
+)
+
 
 
 const UserSlice = createSlice({
@@ -37,6 +47,18 @@ const UserSlice = createSlice({
             console.log(action.payload);
             state.loading = false;
             state.data = action.payload.data
+        });
+
+        builder.addCase(updateUserPassword.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(updateUserPassword.rejected, (state, action) => {
+            state.loading = false;
+            state.message = "Oops something goes wrong... :("
+        });
+        builder.addCase(updateUserPassword.fulfilled, (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message
         });
     },
 });
