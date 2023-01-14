@@ -6,8 +6,6 @@ import absenceColumns from '../../../Contains/Table/AbsenceTable';
 
 const MyAbsencesComponent = ({ absenceList }) => {
 
-
-    console.log({ absenceList });
     return (
         <div style={{ width: "100%", marginTop: "30px" }}>
             <Box sx={{ height: 400, width: '100%' }}>
@@ -19,7 +17,7 @@ const MyAbsencesComponent = ({ absenceList }) => {
                             },
                         },
                     }}
-                    sx={{ height: "317px", marginLeft: "16px" }}
+                    sx={{ height: "317px" }}
                     rows={absenceList}
                     columns={absenceColumns}
                     checkboxSelection={false}

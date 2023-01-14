@@ -83,6 +83,20 @@ const updateUser = async (userId, data) => {
     }
 }
 
+const updateUserPassword = async (userId, user_password) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const update = await pool.request()
+            .input('userId', sql.Int, userId)
+            .input('user_password', sql.NVarChar(250), user_password)
+            .query(sqlQueries.updateUserPassword);
+        return { status: "fullfilled", message: "User Password Updated" };
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const deleteUser = async (userId) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -103,4 +117,5 @@ module.exports = {
     updateUser,
     deleteUser,
     checkUser,
+    updateUserPassword
 }
