@@ -48,6 +48,18 @@ const updateUser = async (req, res, next) => {
     }
 };
 
+const updateUserPassword = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        console.log("RESSSSS", req.body.user_password);
+        const user_password = req.body.user_password;
+        const updated = await userData.updateUserPassword(userId, user_password);
+        res.send(updated);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
 const deleteUser = async (req, res, next) => {
     try {
         const userId = req.params.id;
@@ -64,4 +76,5 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
+    updateUserPassword
 };
