@@ -15,9 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { createAbsence } from '../../../redux/reducers/absence';
 import { getUserAbsences } from '../../../redux/reducers/absence';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
+import MyAbsencesComponent from './MyAbsencesComponent';
 
 const CalendarComponent = () => {
   const [dataForm, setDataForm] = useState({ startDate: null, endDate: null, reasonId: '', approve: false });
@@ -130,34 +128,7 @@ const CalendarComponent = () => {
 
             </Grid>
           </Grid>
-          <Grid container mt={2} sx={{ height: "300px", overflowY: "scroll" }}>
-            {absenceList.length > 0 && absenceList.map((absence, index) => {
-              return (
-                <Grid item xs={12} sx={{ border: "1px solid black", display: "flex", justifyContent: "space-around", mt: "15px", mr: "16px", ml: "16px", borderRadius: "8px", p: "16px" }}>
-                  <div>
-                    <Tooltip title="Reason">
-                      <div>{absence.reason}</div>
-                    </Tooltip>
-                  </div>
-                  <div>
-                    <Tooltip title="Start Date">
-                      <div>{dayjs(absence.start_date).format('DD/MM/YYYY')}</div>
-                    </Tooltip>
-                  </div>
-                  <div>
-                    <Tooltip title="End Date">
-                      <div>{dayjs(absence.end_date).format('DD/MM/YYYY')}</div>
-                    </Tooltip>
-                  </div>
-                  <Tooltip title="Approve">
-                  <div style={absence.approve ? { width: "14px", height: "14px", background: "green", borderRadius: "25px", marginTop: "5px" } : { width: "14px", height: "14px", background: "red", borderRadius: "25px", marginTop: "5px" }}>
-
-                  </div>
-                  </Tooltip>
-                </Grid>
-              )
-            })}
-          </Grid>
+          {absenceList.length > 0 && <MyAbsencesComponent absenceList={absenceList} />}
         </Grid>
       </Box>
     </div>
