@@ -30,7 +30,7 @@ const PasswordComponent = ({ userData }) => {
         const loggedUser = JSON.parse(localStorage.getItem('loggedUser'))
         const userId = loggedUser.id
         if (userId && password.new_password && password.current_password && password.confirm_password) {
-            if (password.current_password === password.confirm_password) {
+            if (password.new_password === password.confirm_password) {
                 dispatch(updateUserPassword({ userId: userId, user_password: password.new_password })).then((data) => {
                     if (data.payload.status === "fullfilled") {
                         setPassword({ current_password: '', new_password: '', confirm_password: '' })
