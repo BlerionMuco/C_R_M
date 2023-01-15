@@ -113,27 +113,30 @@ const DashboardComponent = ({ component }) => {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                    <ListItemButton onClick={handleClick}>
-                        <ListItemIcon>
-                            <SupervisorAccountIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Admin" />
-                        {openChildList ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemButton>
-                    <Collapse sx={{ fontSize: "15px" }} in={openChildList} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            {childMenuList && childMenuList.map((childMenu) => {
-                                return (
-                                    <ListItemButton onClick={() => redirect(childMenu.redirect)} sx={window.location.pathname === childMenu.pathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px", pl: 4 } : { background: "", marginBottom: "8px", pl: 4 }} key={childMenu.id}>
-                                        <ListItemIcon>
-                                            {childMenu.icon}
-                                        </ListItemIcon>
-                                        <ListItemText primary={childMenu.label} />
-                                    </ListItemButton>
-                                )
-                            })}
-                        </List>
-                    </Collapse>
+                    {loggedUser.role_id === 1 &&
+                        <>
+                            <ListItemButton onClick={handleClick}>
+                                <ListItemIcon>
+                                    <SupervisorAccountIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Admin" />
+                                {openChildList ? <ExpandLess /> : <ExpandMore />}
+                            </ListItemButton>
+                            <Collapse sx={{ fontSize: "15px" }} in={openChildList} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                    {childMenuList && childMenuList.map((childMenu) => {
+                                        return (
+                                            <ListItemButton onClick={() => redirect(childMenu.redirect)} sx={window.location.pathname === childMenu.pathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px", pl: 4 } : { background: "", marginBottom: "8px", pl: 4 }} key={childMenu.id}>
+                                                <ListItemIcon>
+                                                    {childMenu.icon}
+                                                </ListItemIcon>
+                                                <ListItemText primary={childMenu.label} />
+                                            </ListItemButton>
+                                        )
+                                    })}
+                                </List>
+                            </Collapse></>
+                    }
                     <Button variant="contained" size='medium' color='primary' onClick={logOut} startIcon={<LogoutIcon />} sx={{ position: "absolute", width: "100%", bottom: "10px" }}>Log Out</Button>
                 </List>
             </Drawer>
