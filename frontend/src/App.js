@@ -9,6 +9,8 @@ import WithoutDashboard from './Containers/Nav/WithoutDashboard';
 import ProfileComponent from './Containers/Components/Profile/ProfileComponent';
 import ProtectedRoute from './Containers/Nav/ProtectedRoute';
 import CalendarComponent from './Containers/Components/Calendar/CalendarComponent';
+import ManageUsersComponent from './Containers/Components/Admin/ManageUsersComponent';
+import ManageWorkDayComponent from './Containers/Components/Admin/ManageWorkDayComponent';
 
 function App() {
   return (
@@ -29,6 +31,12 @@ function App() {
           </Route>
           <Route element={<WithDashboard component={<CalendarComponent />} />} >
             <Route exact path="/calendar" element={<ProtectedRoute path="/calendar" component={<CalendarComponent />} />} />
+          </Route>
+          <Route element={<WithDashboard component={<ManageUsersComponent />} />} >
+            <Route exact path="/userManagment" element={<ProtectedRoute path="/userManagment" component={<ManageUsersComponent />} />} />
+          </Route>
+          <Route element={<WithDashboard component={<ManageWorkDayComponent />} />} >
+            <Route exact path="/manageWorkDay" element={<ProtectedRoute path="/manageWorkDay" component={<ManageWorkDayComponent />} />} />
           </Route>
         </Routes>
       </div>
