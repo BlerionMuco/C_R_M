@@ -5,9 +5,7 @@ SET [first_name]=@first_name,
     [username]=@username,
     [email]=@email,
     [phone_number]=@phone_number,
-    [user_password]=@user_password,
-    [user_verification_password]=@user_verification_password,
-    [role_id]=@role_id,
+    [role_id]=@role_id
 WHERE [id]=@userId
 
 SELECT [id]
