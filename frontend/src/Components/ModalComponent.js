@@ -6,28 +6,39 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { openUserModal } from '../redux/reducers/user';
+import { useDispatch } from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const ModalComponent = ({ modalData, setOpenModal, openModal }) => {
-
+export const ModalComponent = ({ modalData, setOpenModal, openModal, children }) => {
+    const dispatch = useDispatch()
     const handleClose = () => {
         setOpenModal(false);
+        dispatch(openUserModal({ editUserModal: false, userId: 0, deleteUserModal: false }))
     };
 
-    const agree = () =>{
-        if (modalData.context === "clockIn" || modalData.context === "clockOut"  ){
+    const agree = () => {
+        if (modalData.context === "clockIn" || modalData.context === "clockOut") {
             modalData.func(!modalData.dataFunc)
             handleClose();
         }
-        else{
-            if(!modalData.dataFunc.value){
+        else if (modalData.context === "deleteUser") {
+            modalData.func()
+            handleClose();
+        }
+        else if (modalData.context === "editUser") {
+            modalData.func()
+            handleClose();
+        }
+        else {
+            if (!modalData.dataFunc.value) {
                 modalData.func({ text: "Finish the Break", value: !modalData.dataFunc.value })
                 handleClose();
             }
-            else{
+            else {
                 modalData.func({ text: "Start the Break", value: !modalData.dataFunc.value })
                 handleClose();
             }
@@ -47,6 +58,7 @@ export const ModalComponent = ({ modalData, setOpenModal, openModal }) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
                         {modalData.modalContextText}
+                        {children}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

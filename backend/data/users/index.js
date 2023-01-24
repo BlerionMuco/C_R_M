@@ -61,7 +61,7 @@ const createUser = async (userData) => {
     }
 }
 
-const updateUser = async (userId, data) => {
+const updateUser = async (userId, userData) => {
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');

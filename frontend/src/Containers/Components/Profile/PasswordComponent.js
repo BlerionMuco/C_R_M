@@ -57,7 +57,7 @@ const PasswordComponent = ({ userData }) => {
                             required
                             fullWidth
                             size='small'
-                            type="text"
+                            type="password"
                             id="current_password"
                             label="Current Password"
                             name="current_password"
@@ -73,7 +73,7 @@ const PasswordComponent = ({ userData }) => {
                             fullWidth
                             size='small'
                             width='100%'
-                            type="text"
+                            type="password"
                             id="new_password"
                             label="New Password"
                             name="new_password"
@@ -85,10 +85,10 @@ const PasswordComponent = ({ userData }) => {
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <TextField
+                            type="password"
                             size='small'
                             required
                             fullWidth
-                            type="text"
                             id="confirm_password"
                             label="Confirm Password"
                             name="confirm_password"
