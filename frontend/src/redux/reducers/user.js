@@ -3,11 +3,36 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 const initialState = {
+    singleUser: {},
+    users: {},
     data: {},
     roles: {},
+    deleteUserModal: false,
+    editUserModal: false,
+    userId: 0,
     loading: false,
     message: "",
 };
+
+export const getAllUsersAsync = createAsyncThunk(
+    'GET_USERS_REQUEST',
+    async () => {
+        const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + "/api/users");
+        if (!data) return
+        return data
+    }
+)
+
+export const getUserByIdAsync = createAsyncThunk(
+    'GET_SINGLE_USER_REQUEST',
+    async (userId) => {
+        const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}`);
+        if (!data) return
+        return data
+    }
+)
+
+
 
 export const createUserAsync = createAsyncThunk(
     'POST_USER_REQUEST',
@@ -29,13 +54,78 @@ export const updateUserPassword = createAsyncThunk(
     }
 )
 
+export const updateUser = createAsyncThunk(
+    'UPDATE_USER_REQUEST',
+    async ({ userId, userData }) => {
+        console.log({ userId, userData });
+        const { data } = await axios.put(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}`, userData);
+        if (!data) return
+        return data
+    }
+)
+
+export const deleteUserAsync = createAsyncThunk(
+    'DELETE_USER_REQUEST',
+    async (userId) => {
+        console.log(userId);
+        const { data } = await axios.delete(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}`);
+        if (!data) return
+        return data
+    }
+)
+
 
 
 const UserSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: {
+        openUserModal: (state, action) => {
+            state.deleteUserModal = action.payload.deleteUserModal
+            state.editUserModal = action.payload.editUserModal
+            state.userId = action.payload.userId
+
+        }
+    },
     extraReducers: (builder) => {
+
+        builder.addCase(getAllUsersAsync.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(getAllUsersAsync.rejected, (state, action) => {
+            state.loading = false;
+            state.message = "Oops something goes wrong... :("
+        });
+        builder.addCase(getAllUsersAsync.fulfilled, (state, action) => {
+            console.log("tadaaa", action.payload);
+            state.loading = false;
+            state.users = action.payload
+        });
+
+        builder.addCase(getUserByIdAsync.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(getUserByIdAsync.rejected, (state, action) => {
+            state.loading = false;
+            state.message = "Oops something goes wrong... :("
+        });
+        builder.addCase(getUserByIdAsync.fulfilled, (state, action) => {
+            state.loading = false;
+            state.singleUser = action.payload
+        });
+
+        builder.addCase(updateUser.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(updateUser.rejected, (state, action) => {
+            state.loading = false;
+            state.message = "Oops something goes wrong... :("
+        });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message
+        });
+
         builder.addCase(createUserAsync.pending, (state, action) => {
             state.loading = true;
         });
@@ -60,7 +150,19 @@ const UserSlice = createSlice({
             state.loading = false;
             state.message = action.payload.message
         });
+
+        builder.addCase(deleteUserAsync.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteUserAsync.rejected, (state, action) => {
+            state.loading = false;
+            state.message = "Oops something goes wrong... :("
+        });
+        builder.addCase(deleteUserAsync.fulfilled, (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message
+        });
     },
 });
-
+export const { openUserModal } = UserSlice.actions
 export default UserSlice.reducer;
