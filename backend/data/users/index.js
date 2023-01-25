@@ -91,7 +91,7 @@ const updateUserPassword = async (userId, user_password) => {
             .input('userId', sql.Int, userId)
             .input('user_password', sql.NVarChar(250), user_password)
             .query(sqlQueries.updateUserPassword);
-        return { status: "fullfilled", message: "User Password Updated" };
+        return { status: "success", message: "Password updated successfully" };
     } catch (error) {
         return error.message;
     }
@@ -104,7 +104,7 @@ const deleteUser = async (userId) => {
         const deleteUser = await pool.request()
             .input('userId', sql.Int, userId)
             .query(sqlQueries.deleteUser);
-        return { status: "fullfilled", message: "User Deleted" };
+        return { status: "success", message: "User deleted successfully !" };
     } catch (error) {
         return error.message;
     }

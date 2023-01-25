@@ -27,11 +27,14 @@ import { childMenuList } from '../../Contains/menu';
 import { useTheme } from '@mui/material/styles';
 import { Main, DrawerHeader } from '../Utils/MuiUtils';
 import { AppBar } from '../Utils/MuiUtils';
+import { useDispatch } from 'react-redux';
+import { showNotification } from '../../redux/reducers/notification';
 const drawerWidth = 240;
 
 
 const DashboardComponent = ({ component }) => {
     const theme = useTheme();
+    const dispatch = useDispatch()
     const [open, setOpen] = useState(true);
     const navigate = useNavigate()
     const [openChildList, setOpenChildList] = useState(false);
@@ -54,6 +57,7 @@ const DashboardComponent = ({ component }) => {
     }
 
     const logOut = () => {
+        dispatch(showNotification({ message: "User logged out successfully", variant: "success" }))
         navigate("/");
         localStorage.removeItem('token');
         localStorage.removeItem('loggedUser');

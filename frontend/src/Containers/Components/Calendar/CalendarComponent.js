@@ -37,26 +37,13 @@ const CalendarComponent = () => {
     setDataForm({ ...dataForm, reasonId: e.target.value })
   }
 
-  const showMessage = ({ message, color }) => {
-    setTimeout(function () {
-      document.getElementById("showMessage").style.color = color;
-      document.getElementById("showMessage").innerHTML = message;
-    }, 200);
-    setTimeout(function () {
-      document.getElementById("showMessage").innerHTML = '';
-    }, 3000);
-  }
-
   const createAbsenceFunc = () => {
     dispatch(createAbsence({ absenceData: { userId: userId, ...dataForm } })).then((data) => {
-      if (data.payload.status === "fullfilled") {
+      if (data.payload.status === "success") {
         setDataForm({ startDate: null, endDate: null, reasonId: '', approve: false })
-        showMessage({ color: "green", message: "Absence Created!" })
         if (userId) {
           dispatch(getUserAbsences(userId))
         }
-      } else {
-        showMessage({ color: "red", message: "Error!" })
       }
     })
   }
@@ -128,8 +115,7 @@ const CalendarComponent = () => {
                 </FormControl>
               }
               <Grid container mt={1}>
-                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', }}>
-                  <div id="showMessage" style={{ fontSize: "17px", fontFamily: "monospace", marginLeft: "18px", marginTop: "5px" }}></div>
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end', }}>
                   <Button
                     buttontype="loading"
                     variant="contained"

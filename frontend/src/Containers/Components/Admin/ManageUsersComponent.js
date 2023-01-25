@@ -27,19 +27,17 @@ const ManageUsersComponent = () => {
 
   const deleteUserFunc = useCallback(() => {
     dispatch(deleteUserAsync(userId)).then((data) => {
-      if (data.payload.status === "fullfilled") {
+      if (data.payload.status === "success") {
         dispatch(getAllUsersAsync())
       }
     })
   }, [userId, dispatch])
 
   const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
     setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
   }
 
   const editUserFunc = useCallback(() => {
-    console.log("hereeeee");
     dispatch(updateUser({ userId: userId, userData: dataForm }))
   }, [dispatch, userId, dataForm])
 
@@ -54,8 +52,6 @@ const ManageUsersComponent = () => {
     }
 
   }, [deleteUser, editUser, userId, deleteUserFunc, editUserFunc, dispatch]);
-
-  console.log({ editUser, singleUser });
 
   return (
     <div>
