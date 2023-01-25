@@ -47,7 +47,6 @@ export const createUserAsync = createAsyncThunk(
 export const updateUserPassword = createAsyncThunk(
     'UPDATE_USER_PASSWORD_REQUEST',
     async ({ userId, user_password }) => {
-        console.log(userId, user_password);
         const { data } = await axios.put(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}/updatePassword`, { user_password: user_password });
         if (!data) return
         return data
@@ -57,7 +56,6 @@ export const updateUserPassword = createAsyncThunk(
 export const updateUser = createAsyncThunk(
     'UPDATE_USER_REQUEST',
     async ({ userId, userData }) => {
-        console.log({ userId, userData });
         const { data } = await axios.put(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}`, userData);
         if (!data) return
         return data
@@ -67,7 +65,6 @@ export const updateUser = createAsyncThunk(
 export const deleteUserAsync = createAsyncThunk(
     'DELETE_USER_REQUEST',
     async (userId) => {
-        console.log(userId);
         const { data } = await axios.delete(process.env.REACT_APP_BACKEND_URL + `/api/users/${userId}`);
         if (!data) return
         return data
@@ -97,7 +94,6 @@ const UserSlice = createSlice({
             state.message = "Oops something goes wrong... :("
         });
         builder.addCase(getAllUsersAsync.fulfilled, (state, action) => {
-            console.log("tadaaa", action.payload);
             state.loading = false;
             state.users = action.payload
         });
@@ -134,7 +130,6 @@ const UserSlice = createSlice({
             state.message = "Oops something goes wrong... :("
         });
         builder.addCase(createUserAsync.fulfilled, (state, action) => {
-            console.log(action.payload);
             state.loading = false;
             state.data = action.payload.data
         });

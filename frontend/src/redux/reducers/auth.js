@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export const authUserAsync = createAsyncThunk(
-    'AUTH_USER_REQUEST',
+    'LOGIN_USER_REQUEST',
     async ({ dataForm }) => {
         const { data } = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/signIn", dataForm);
         if (!data) return

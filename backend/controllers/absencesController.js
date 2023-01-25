@@ -16,13 +16,13 @@ const createAbsence = async (req, res, next) => {
         const data = req.body;
         const insert = await absenceData.createAbsence(data);
         const dataReturn = { ...insert }
-        res.send(dataReturn);
+        res.send({ status: "success", message: "Absence created successfully !", dataReturn });
     } catch (error) {
         res.status(400).send(error.message);
     }
 };
 
 module.exports = {
-   getUserAbsences,
-   createAbsence
+    getUserAbsences,
+    createAbsence
 };
