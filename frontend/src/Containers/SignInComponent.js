@@ -37,7 +37,7 @@ const SignInComponent = () => {
     return (
         <div>
             < BackGround >
-                <Box sx={{ backgroundColor: "#E0E1DD", maxWidth: "300px", margin: "0 auto", p: "25px", borderRadius: "8px", }}>
+                <Box sx={{ backgroundColor: "white", maxWidth: "300px", margin: "0 auto", p: "25px", borderRadius: "8px", }}>
                     <Grid container spacing={2}>
                         <Grid sx={{ textAlign: "center" }} item xs={12}>
                             <div style={{ fontSize: "17px", fontWeight: "600" }}>Log In</div>

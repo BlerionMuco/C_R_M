@@ -3,13 +3,10 @@ import { Route, Navigate } from 'react-router-dom';
 
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-    console.log("Hereeeeee");
     const checkValidToken = () => {
         const token = localStorage.getItem('token');
         if (token) { return true } else { return false; }
     }
-
-    console.log(checkValidToken());
 
     return (
         <Fragment>
