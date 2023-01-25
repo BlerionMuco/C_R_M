@@ -15,9 +15,9 @@ const authUser = async (req, res, next) => {
                     expiresIn: "2h",
                 }
             );
-            res.send({ status: "fulfilled", message: "User found", token: token, user: user[0] })
+            res.send({ status: "success", message: "User logged in successfully !", token: token, user: user[0] })
         } else {
-            res.send({ status: "fulfilled", message: "No user found" })
+            res.send({ status: "rejected", message: "User not found !" })
         }
     } catch (error) {
         res.status(400).send(error.message);
