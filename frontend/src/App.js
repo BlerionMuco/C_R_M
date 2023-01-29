@@ -11,6 +11,7 @@ import ProtectedRoute from './Containers/Nav/ProtectedRoute';
 import CalendarComponent from './Containers/Components/Calendar/CalendarComponent';
 import ManageUsersComponent from './Containers/Components/Admin/ManageUsersComponent';
 import ManageWorkDayComponent from './Containers/Components/Admin/ManageWorkDayComponent';
+import CreateUserComponent from './Containers/Components/Admin/CreateUserComponent';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route element={<WithDashboard component={<ManageWorkDayComponent />} />} >
             <Route path="/manageWorkDay" element={<ProtectedRoute path="/manageWorkDay" component={<ManageWorkDayComponent />} />} />
+          </Route>
+          <Route element={<WithDashboard component={<CreateUserComponent />} />} >
+            <Route path="/createUser" element={<ProtectedRoute path="/createUser" component={<CreateUserComponent />} />} />
           </Route>
         </Routes>
       </div>

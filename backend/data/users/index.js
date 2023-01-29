@@ -55,7 +55,7 @@ const createUser = async (userData) => {
             .input('user_verification_password', sql.NVarChar(250), userData.user_verification_password)
             .input('role_id', sql.Int(250), userData.role_id)
             .query(sqlQueries.createUser);
-        return { status: "fullfilled", message: "User Created" };
+        return { status: "success", message: "User Created" };
     } catch (error) {
         return error.message;
     }
@@ -77,7 +77,7 @@ const updateUser = async (userId, userData) => {
             .input('user_verification_password', sql.NVarChar(250), userData.user_verification_password)
             .input('role_id', sql.Int(250), userData.role_id)
             .query(sqlQueries.updateUser);
-        return { status: "fullfilled", message: "User Updated" };
+        return { status: "success", message: "User Updated" };
     } catch (error) {
         return error.message;
     }
