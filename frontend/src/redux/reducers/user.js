@@ -39,7 +39,9 @@ export const createUserAsync = createAsyncThunk(
     async ({ dataForm, callThunk }) => {
         const { data } = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/users", dataForm);
         if (!data) return
-        callThunk();
+        if (callThunk()) {
+            callThunk();
+        }
         return data
     }
 )

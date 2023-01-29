@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteUserAsync, getAllUsersAsync, updateUser } from '../../../redux/reducers/user';
 import ModalComponent from '../../../Components/ModalComponent';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
 
 const ManageUsersComponent = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const [modalData, setModalData] = useState({ modalTitle: '', modalContextText: '', context: '', dataFunc: {}, func: null, });
   const [openModal, setOpenModal] = useState(false);
   const [dataForm, setDataForm] = useState({ first_name: null, last_name: null, username: null, email: null, age: null, phone_number: null });
@@ -35,6 +36,10 @@ const ManageUsersComponent = () => {
 
   const handleChange = (e) => {
     setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
+  }
+
+  const goToCreateUser = () => {
+    navigate('/createUser')
   }
 
   const editUserFunc = useCallback(() => {
@@ -70,6 +75,7 @@ const ManageUsersComponent = () => {
                 width: "140px",
               },
             }}
+            onClick={goToCreateUser}
             size="medium"
           >
             Create User
