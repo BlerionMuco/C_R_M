@@ -54,6 +54,7 @@ export const childMenuList = [
         id: 1,
         name: "userManagment",
         pathname: "/userManagment",
+        subPathname: "/createUser",
         label: "Users",
         icon: <ManageAccountsIcon />,
         redirect: "/userManagment",
@@ -67,5 +68,5 @@ export const childMenuList = [
         icon: <EventRepeatIcon />,
         redirect: "/manageWorkDay",
         component: <ManageWorkDayComponent />
-    }
+    },
 ]

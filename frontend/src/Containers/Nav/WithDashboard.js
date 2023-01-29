@@ -10,13 +10,14 @@ const WithDashboard = ({ component }) => {
   }
 
   const checkIfIsAdmin = () => {
+    const adminPath = ["/userManagment", "/manageWorkDay", '/createUser']
     const path = window.location.pathname
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     if (loggedUser?.role_id === 1) {
       return true
     }
     else {
-      if (path === "/userManagment" || path === "/manageWorkDay") {
+      if (adminPath.includes(path)) {
         return false
       }
       else {

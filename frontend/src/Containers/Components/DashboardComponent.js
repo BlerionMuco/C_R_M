@@ -29,8 +29,11 @@ import { Main, DrawerHeader } from '../Utils/MuiUtils';
 import { AppBar } from '../Utils/MuiUtils';
 import { useDispatch } from 'react-redux';
 import { showNotification } from '../../redux/reducers/notification';
+import useGetThemeOnStorage from '../../hooks/useGetThemeOnStorage';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { MaterialUISwitch } from '../Utils/MuiUtils';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 const drawerWidth = 240;
-
 
 const DashboardComponent = ({ component }) => {
     const theme = useTheme();
@@ -38,6 +41,7 @@ const DashboardComponent = ({ component }) => {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate()
     const [openChildList, setOpenChildList] = useState(false);
+    const [themeMode, setThemeMode] = useState(useGetThemeOnStorage());
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -63,6 +67,16 @@ const DashboardComponent = ({ component }) => {
         localStorage.removeItem('loggedUser');
     }
 
+    const changeTheme = (event) => {
+        console.log({ event });
+        setThemeMode(event.target.checked)
+        localStorage.setItem("theme", event.target.checked)
+    }
+
+    const goBack = () => {
+        navigate(-1)
+    }
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -80,10 +94,16 @@ const DashboardComponent = ({ component }) => {
                     <Typography variant="h6" noWrap component="div">
                         Hello {loggedUser.username}
                     </Typography>
-                    <div onClick={() => navigate("/profile")} style={{ alignItems: "center", display: "inline-grid", cursor: "pointer" }}>
-                        <AccountCircleIcon fontSize='large' sx={{ margin: "0 auto" }} />
-                        <div style={{ fontSize: "14px", textAlign: "center" }}>{loggedUser.username}</div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <div>
+                            <FormControlLabel control={<MaterialUISwitch onChange={changeTheme} checked={themeMode} />} />
+                        </div>
+                        <div onClick={() => navigate("/profile")} style={{ alignItems: "center", display: "inline-grid", cursor: "pointer" }}>
+                            <AccountCircleIcon fontSize='large' sx={{ margin: "0 auto" }} />
+                            <div style={{ fontSize: "14px", textAlign: "center" }}>{loggedUser.username}</div>
+                        </div>
                     </div>
+
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -130,7 +150,7 @@ const DashboardComponent = ({ component }) => {
                                 <List component="div" disablePadding>
                                     {childMenuList && childMenuList.map((childMenu) => {
                                         return (
-                                            <ListItemButton onClick={() => redirect(childMenu.redirect)} sx={window.location.pathname === childMenu.pathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px", pl: 4 } : { background: "", marginBottom: "8px", pl: 4 }} key={childMenu.id}>
+                                            <ListItemButton onClick={() => redirect(childMenu.redirect)} sx={window.location.pathname === childMenu.pathname || window.location.pathname === childMenu?.subPathname ? { background: "#CFCFD1", borderRadius: "8px", marginBottom: "8px", pl: 4 } : { background: "", marginBottom: "8px", pl: 4 }} key={childMenu.id}>
                                                 <ListItemIcon>
                                                     {childMenu.icon}
                                                 </ListItemIcon>
@@ -146,6 +166,9 @@ const DashboardComponent = ({ component }) => {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
+                <div>
+                    <ArrowBackIosNewIcon onClick={goBack} sx={{ cursor: "pointer" }} />
+                </div>
                 {React.cloneElement(component, { open: open })}
             </Main>
         </Box>

@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authUserAsync } from '../redux/reducers/auth';
 import { useNavigate } from "react-router-dom";
+import useThemeDetector from '../hooks/useThemeDetector';
 
 
 const SignInComponent = () => {
@@ -19,6 +20,7 @@ const SignInComponent = () => {
     const handleChange = (e) => {
         setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
     }
+    const theme = useThemeDetector()
 
     // useEffect(() => {
     //     if (token) {
@@ -30,6 +32,7 @@ const SignInComponent = () => {
         dispatch(authUserAsync({ dataForm })).then((res) => {
             if (res.payload.token) {
                 navigate('/work')
+                localStorage.setItem("theme", theme)
             }
         })
     }
