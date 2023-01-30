@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -67,10 +67,23 @@ const DashboardComponent = ({ component }) => {
         localStorage.removeItem('loggedUser');
     }
 
+    useEffect(() => {
+        if (themeMode) {
+            document.body.className = 'dark-theme';
+        }
+        else {
+            document.body.className = 'light-theme';
+        }
+    }, []);
+
     const changeTheme = (event) => {
-        console.log({ event });
         setThemeMode(event.target.checked)
         localStorage.setItem("theme", event.target.checked)
+        if(event.target.checked){  
+            document.body.className= 'dark-theme' ;
+        }else{
+            document.body.className = 'light-theme';  
+        }
     }
 
     const goBack = () => {
