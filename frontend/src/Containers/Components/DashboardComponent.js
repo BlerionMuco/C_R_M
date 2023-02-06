@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -67,22 +67,22 @@ const DashboardComponent = ({ component }) => {
         localStorage.removeItem('loggedUser');
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (themeMode) {
             document.body.className = 'dark-theme';
         }
         else {
             document.body.className = 'light-theme';
         }
-    }, []);
+    }, [themeMode]);
 
     const changeTheme = (event) => {
         setThemeMode(event.target.checked)
         localStorage.setItem("theme", event.target.checked)
-        if(event.target.checked){  
-            document.body.className= 'dark-theme' ;
-        }else{
-            document.body.className = 'light-theme';  
+        if (event.target.checked) {
+            document.body.className = 'dark-theme';
+        } else {
+            document.body.className = 'light-theme';
         }
     }
 
@@ -91,7 +91,7 @@ const DashboardComponent = ({ component }) => {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box className='box-root' sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar sx={{ background: "#4e54c8", display: "flex", justifyContent: "space-between" }}>
@@ -179,9 +179,9 @@ const DashboardComponent = ({ component }) => {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <div>
+                {/* <div>
                     <ArrowBackIosNewIcon onClick={goBack} sx={{ cursor: "pointer" }} />
-                </div>
+                </div> */}
                 {React.cloneElement(component, { open: open })}
             </Main>
         </Box>
