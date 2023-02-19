@@ -1,25 +1,28 @@
 //darkTheme
-$background-darkTheme:black;
-$headerBar-darkTheme:rgb(56, 54, 54);
-$menuBarHeader-darkTheme: rgb(56, 54, 54);
-$menuBar-darkTheme: rgb(56, 54, 54);
-$textDashboardColor-darkTheme:white;
-$icon-darkTheme:white;
-$menuBarSelectedCategory-darkTheme:#5d5d5f;
+$background-darkTheme: black;
+$headerBar-darkTheme: #1c1c27;
+$menuBarHeader-darkTheme: #1c1c27;
+$menuBar-darkTheme: #1c1c27;
+$textDashboardColor-darkTheme: white;
+$icon-darkTheme: white;
+$menuBarSelectedCategory-darkTheme: #28283e;
 $backNavigationIcon-darkTheme: white;
+$box-root-darkTheme: #1c1c27;
+$input-color-darkTheme: white;
+$field-label-darkTheme: white;
 
 //lightTheme
 $background-lightTheme: white;
 $headerBar-lightTheme: #4e54c8;
-$menuBarHeader-lightTheme:white;
+$menuBarHeader-lightTheme: white;
 $menuBar-lightTheme: white;
 $textDashboardColor: black;
 $icon-lightTheme: rgba(0, 0, 0, 0.54);
-$menuBarSelectedCategory-lightTheme:#CFCFD1;
+$menuBarSelectedCategory-lightTheme: #cfcfd1;
 $backNavigationIcon-lightTheme: black;
-
-
-
+$box-root-lightTheme: white;
+$input-color-lightTheme: rgba(0, 0, 0, 0.6);
+$field-label-lightTheme: rgba(0, 0, 0, 0.6);
 
 body {
   margin: 0;
@@ -28,50 +31,96 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body.dark-theme{
-  .css-1tamf17-MuiToolbar-root{
+body.dark-theme {
+  .css-1tamf17-MuiToolbar-root {
     background: $headerBar-darkTheme;
-  };
+  }
 
-  .css-1ezlguy{
+  .css-1ezlguy {
     background: $menuBarHeader-darkTheme;
     color: white;
-  };
+  }
 
-  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
     background: $menuBar-darkTheme;
-    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+      0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
     color: white;
-  };
+  }
 
-  .css-i4bv87-MuiSvgIcon-root{
+  .css-i4bv87-MuiSvgIcon-root {
     color: $icon-darkTheme;
-  };
+  }
 
-  .css-leit3j-MuiListItem-root{
+  .css-leit3j-MuiListItem-root {
     background: $menuBarSelectedCategory-darkTheme;
   }
 
-  .css-lw08pq-MuiSvgIcon-root{
+  .css-lw08pq-MuiSvgIcon-root {
     color: $backNavigationIcon-darkTheme;
+  }
+
+  .box-root {
+    background-color: $box-root-darkTheme;
+    height: 100vh;
+  }
+  .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled
+    .MuiOutlinedInput-notchedOutline {
+    border-color: $input-color-darkTheme;
+  }
+  .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled {
+    color: $field-label-darkTheme;
+  }
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-disabled
+    .MuiOutlinedInput-notchedOutline {
+    border-color: $input-color-darkTheme;
+  }
+
+  .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+    -webkit-text-fill-color: $input-color-darkTheme;
+  }
+
+  .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+    -webkit-text-fill-color: $input-color-darkTheme;
+  }
+
+  .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon.Mui-disabled {
+    color: $icon-darkTheme;
+  }
+
+  .css-ffj933-MuiButtonBase-root-MuiTab-root.MuiTab-root {
+    -webkit-text-fill-color: $input-color-darkTheme;
+  }
+
+  .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+    -webkit-text-fill-color: $input-color-darkTheme;
+  }
+
+  .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    -webkit-text-fill-color: $input-color-darkTheme;
+    border-color: $field-label-darkTheme;
+  }
+
+  .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+    -webkit-text-fill-color: $input-color-darkTheme;
   }
 }
 
 body.light-theme {
   .css-1tamf17-MuiToolbar-root {
     background: $headerBar-lightTheme;
-  };
+  }
   .css-1ezlguy {
-    background: $menuBarHeader-lightTheme ;
-  };
+    background: $menuBarHeader-lightTheme;
+  }
 
   .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
     background: $menuBar-lightTheme;
-  };
+  }
 
   .css-i4bv87-MuiSvgIcon-root {
     color: $icon-lightTheme;
-  };
+  }
 
   .css-leit3j-MuiListItem-root {
     background: $menuBarSelectedCategory-lightTheme;
@@ -80,9 +129,38 @@ body.light-theme {
   .css-lw08pq-MuiSvgIcon-root {
     color: $backNavigationIcon-lightTheme;
   }
+
+  .box-root {
+    background-color: $box-root-lightTheme;
+    height: 100vh;
+  }
+
+  // .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled
+  //   .MuiOutlinedInput-notchedOutline {
+  //   border-color: $input-color-lightTheme;
+  // }
+
+  // .css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled {
+  //   color: $field-label-lightTheme;
+  // }
+
+  // .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-disabled
+  //   .MuiOutlinedInput-notchedOutline {
+  //   border-color: $input-color-lightTheme;
+  // }
+
+  // .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  //   -webkit-text-fill-color: $input-color-lightTheme;
+  // }
+
+  // .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  //   -webkit-text-fill-color: $input-color-lightTheme;
+  // }
+
+  // .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon.Mui-disabled {
+  //   color: $icon-lightTheme;
+  // }
 }
-
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -93,11 +171,11 @@ code {
   color: white !important;
 } */
 
-.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   min-width: 380px !important;
 }
 
-.container{
+.container {
   display: inline-block;
   font-family: monospace;
   font-size: 17px;
@@ -110,14 +188,24 @@ code {
   width: 0;
   animation: typing 1.5s steps(30, end) forwards, blinking 1s infinite;
 }
-  
+
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blinking {
-  0% {border-right-color: transparent}
-  50% {border-right-color: black}
-  100% {border-right-color: transparent}
+  0% {
+    border-right-color: transparent;
+  }
+  50% {
+    border-right-color: black;
+  }
+  100% {
+    border-right-color: transparent;
+  }
 }
