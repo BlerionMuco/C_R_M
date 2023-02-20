@@ -7,5 +7,6 @@ SELECT [id]
     ,[user_password]
     ,[user_verification_password]
     ,[role_id]
+    ,[email]
 FROM [dbo].[users]
 WHERE [id]=@userId
