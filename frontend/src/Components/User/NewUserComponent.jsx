@@ -7,7 +7,6 @@ const NewUserComponent = ({ dataForm, setDataForm }) => {
   const handleChange = (e) => {
     setDataForm({ ...dataForm, ...{ [e.target.name]: e.target.value } });
   };
-  console.log({ dataForm });
   return (
     <div>
       <Grid container spacing={2}>

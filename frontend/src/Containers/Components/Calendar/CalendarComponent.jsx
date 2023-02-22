@@ -14,7 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createAbsence } from "../../../redux/reducers/absence";
-import { getUserAbsences } from "../../../redux/reducers/absence";
+import {
+  getUserAbsences,
+  getAllAbsences,
+} from "../../../redux/reducers/absence";
 import MyAbsencesComponent from "./MyAbsencesComponent";
 
 const CalendarComponent = () => {
@@ -26,17 +29,21 @@ const CalendarComponent = () => {
   });
   const user = JSON.parse(localStorage.getItem("loggedUser"));
   const userId = user.id;
+  const userRole = user.role_id;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllReasons());
-    if (userId) {
+    if (userId && userRole === 1) {
+      dispatch(getAllAbsences());
+    } else {
       dispatch(getUserAbsences(userId));
     }
-  }, [dispatch, userId]);
+  }, [dispatch, userId, userRole]);
 
   const allReasons = useSelector((state) => state.staticData.reasons);
   const absenceList = useSelector((state) => state.absence.absencesList);
+  const allAbsences = useSelector((state) => state.absence.allAbsences);
 
   const handleChange = (e) => {
     setDataForm({ ...dataForm, reasonId: e.target.value });
@@ -123,7 +130,7 @@ const CalendarComponent = () => {
                 </LocalizationProvider>
               </Grid>
 
-              {allReasons.length > 0 && (
+              {allReasons && allReasons.length > 0 && (
                 <FormControl sx={{ mt: 2, ml: "16px" }} size="small" fullWidth>
                   <InputLabel id="demo-simple-select-label">Reason</InputLabel>
                   <Select
@@ -170,9 +177,12 @@ const CalendarComponent = () => {
               </Grid>
             </Grid>
           </Box>
-          {absenceList.length > 0 && (
+          {userRole !== 1 && absenceList && absenceList.length > 0 && (
             <MyAbsencesComponent absenceList={absenceList} />
           )}
+          {userRole === 1 && allAbsences && allAbsences.length > 0 && (
+            <MyAbsencesComponent absenceList={allAbsences} />
+          )}{" "}
         </Grid>
       </Box>
     </div>
