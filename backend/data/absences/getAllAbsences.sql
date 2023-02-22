@@ -1,0 +1,5 @@
+select [absences].[id]
+      ,[absences].[start_date]
+      ,[absences].[end_date]
+      ,[absences].[approve]
+      ,[reason].[reason] from [dbo].[absences] inner join [dbo].[reason] on [absences].[reason_id] = [reason].[id] 

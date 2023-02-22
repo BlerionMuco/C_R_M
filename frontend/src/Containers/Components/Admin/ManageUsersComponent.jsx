@@ -66,8 +66,14 @@ const ManageUsersComponent = () => {
   };
 
   const editUserFunc = useCallback(() => {
-    dispatch(updateUser({ userId: userId, userData: dataForm }));
-    dispatch(getAllUsersAsync());
+    dispatch(updateUser({ userId: userId, userData: dataForm })).then(
+      (data) => {
+        console.log({ data });
+        if (data.payload.status === "success") {
+          dispatch(getAllUsersAsync());
+        }
+      }
+    );
   }, [dispatch, userId, dataForm]);
 
   useEffect(() => {
@@ -91,8 +97,6 @@ const ManageUsersComponent = () => {
       setOpenModal(true);
     }
   }, [deleteUser, editUser, userId, deleteUserFunc, editUserFunc, dispatch]);
-
-  console.log({ dataForm });
 
   return (
     <div>

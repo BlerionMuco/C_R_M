@@ -8,7 +8,6 @@ const Notifications = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const snackbarData = useSelector((state) => state.notification.notifications);
-  console.log({ snackbarData });
   const message = snackbarData.message;
   const variant = snackbarData.variant;
 
