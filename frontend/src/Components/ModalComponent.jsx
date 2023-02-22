@@ -19,7 +19,6 @@ export const ModalComponent = ({
   openModal,
   children,
 }) => {
-  console.log({ modalData });
   const dispatch = useDispatch();
   const handleClose = () => {
     setOpenModal(false);
