@@ -10,35 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import UserData from "./UserData";
 import PasswordComponent from "./PasswordComponent";
 import { getAllRoles } from "../../../redux/reducers/staticData";
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
-    </div>
-  );
-}
+import { a11yProps, TabPanel } from "../../Utils/MuiUtils";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 
 const ProfileComponent = () => {
   const [value, setValue] = useState(0);
@@ -52,7 +30,7 @@ const ProfileComponent = () => {
     dispatch(getAllRoles());
   }, [dispatch]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (tabValue === "") {
       setValue(0);
     }
